@@ -6,8 +6,9 @@ class Enemy{
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
+    // this.x = x;
+    // this.y = y;
+    // this.speed = s;
   }
   // Update the enemy's position, required method for game
   // Parameter: dt, a time delta between ticks
@@ -15,11 +16,17 @@ class Enemy{
       // You should multiply any movement by the dt parameter
       // which will ensure the game runs at the same speed for
       // all computers.
+      // this.x += this.speed * dt;
+      // if (this.x > 707) {
+      //   this.x = -10;
+      //   let movementSpeed = Math.floor(Math.random() * 5);
+      //   this.speed = 60 * movementSpeed;
+      // }
     }
   // Draw the enemy on the screen, required method for game
   render() {
       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-      this.x = -80;
+      this.x = -50;
       this.y = 60;
   };
 
@@ -34,16 +41,22 @@ class Enemy{
 class Player {
   constructor(){
     this.sprite = 'images/char-boy.png';
+    this.x = 303;
+    this.y = 404;
+    this.h_step = 101;
+    this.v_step = 83;
   }
   update(){
 
   }
   render(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    this.x = 303;
-    this.y = 404;
   }
   handleInput(){
+    //switch?
+    this.x = this.h_step - 83;
+
+
 
   }
 }
@@ -61,7 +74,7 @@ let player = newPlayer;
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+    const allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
