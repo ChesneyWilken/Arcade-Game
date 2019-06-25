@@ -1,38 +1,26 @@
 // Enemies our player must avoid
-class Enemy{
-  // Variables applied to each of our instances go here,
-  // we've provided one for you to get started
-  constructor(x, y, s){
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+class Enemy {
+  constructor(x, y, speed){
     this.sprite = 'images/enemy-bug.png';
-    // this.x = x;
-    // this.y = y;
-    // this.speed = s;
-  }
-  // Update the enemy's position, required method for game
-  // Parameter: dt, a time delta between ticks
-  update(dt) {
-      // You should multiply any movement by the dt parameter
-      // which will ensure the game runs at the same speed for
-      // all computers.
-      // this.x += this.speed * dt;
-      // if (this.x > 707) {
-      //   this.x = -10;
-      //   let movementSpeed = Math.floor(Math.random() * 5);
-      //   this.speed = 60 * movementSpeed;
-      // }
-    }
-  // Draw the enemy on the screen, required method for game
-  render() {
-      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-      this.x = -50;
-      this.y = 60;
+    this.x = -32;
+    this.y = y;
+    this.speed = speed;
   };
 
+  update(dt) {
+    this.x += this.speed * dt;
+    if (this.x >= 707) {
+     this.x = -83;
+     this.speed = 100 * Math.floor(Math.random() * 4 + 1);
+    }
+
+    // hit boxes
+  };
+  render() {
+      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  };
 
 };
-
 
 
 // Now write your own player class
@@ -43,8 +31,6 @@ class Player {
     this.sprite = 'images/char-boy.png';
     this.x = 303;
     this.y = 404;
-    this.h_step = 101;
-    this.v_step = 83;
   }
   update(){
 
@@ -52,22 +38,47 @@ class Player {
   render(){
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
-  handleInput(){
-    //switch?
-    this.x = this.h_step - 83;
+  handleInput(movement){
 
+    switch (movement) {
+      case 'left':
+      this.x >= 101 ? this.x -= 101 : this.x -= 0;
+      break;
 
+      case 'up':
+      if (this.y >= 83) {
+          this.y -= 83
+      }else {
+        this.x = 303;
+        this.y = 404;
+        //score++;
+      }
+
+      break;
+
+      case 'right':
+      this.x >= 606 ? this.x += 0 : this.x += 101 ;
+
+      break;
+
+      case 'down':
+      this.y >= 404 ? this.y += 0 : this.y += 83;
+
+      break;
+    }
 
   }
 }
 
+//let scorePanel = document.createElement(div)
 
 // Now instantiate your objects.
 const newPlayer = new Player();
-const enemy = new Enemy();
-
+const enemyTop = new Enemy(-32, 60, 100);
+const enemyMid = new Enemy(-32, 140, 200);
+const enemyBot = new Enemy(-32, 220, 150);
 // Place all enemy objects in an array called allEnemies
-let allEnemies = [enemy];
+let allEnemies = [enemyTop, enemyMid,enemyBot];
 // Place the player object in a variable called player
 let player = newPlayer;
 
@@ -83,3 +94,7 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// additional syles for the score box
+const container = document.createElement('div');
+container.setAttribute('class', 'scorePanel');
