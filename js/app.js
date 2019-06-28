@@ -1,10 +1,39 @@
+// additional DOM elements for the score box
+const body = document.querySelector('body');
+const panel = document.createElement('div');
+panel.setAttribute('class', 'scorePanel');
+body.appendChild(panel);
+
+let score = 0;
+
+const scoreCount = document.createElement('p')
+scoreCount.innerHTML =' Score: ' + score;
+
+panel.appendChild(scoreCount);
+
+
+
+  // ;
+  // msg.textContent = 'Congratulations, your final time was ' + count +' seconds. \n You got ' + displayStars +' stars';
+  //
+  //
+  // const playAgain = document.createElement('button');
+  // playAgain.textContent = 'Play Again!';
+  // panel.appendChild(playAgain);
+  //
+  //
+  // playAgain.onclick = function() {
+  //   //resetGame();
+  // }
+
+
 // Enemies our player must avoid
 class Enemy {
   constructor(x, y, speed){
     this.sprite = 'images/enemy-bug.png';
-    this.x = -32;
+    this.x = y;
     this.y = y;
-    this.speed = speed;
+    this.speed = 100 * Math.floor(Math.random() * 4 + 1);
   };
 
   update(dt) {
@@ -14,7 +43,13 @@ class Enemy {
      this.speed = 100 * Math.floor(Math.random() * 4 + 1);
     }
 
-    // hit boxes
+    if (player.x < this.x + 72 &&
+        player.x + 69 > this.x &&
+        player.y < this.y + 64 &&
+        64 + player.y > this.y) {
+        player.x = 303;
+        player.y = 404;
+    };
   };
   render() {
       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -48,29 +83,26 @@ class Player {
       case 'up':
       if (this.y >= 83) {
           this.y -= 83
-      }else {
+      } else {
         this.x = 303;
         this.y = 404;
-        //score++;
-      }
+        score += 10;
+        console.log(score);
 
+      }
       break;
 
       case 'right':
-      this.x >= 606 ? this.x += 0 : this.x += 101 ;
-
+      this.x >= 606 ? this.x += 0 : this.x += 101;
       break;
 
       case 'down':
       this.y >= 404 ? this.y += 0 : this.y += 83;
-
       break;
     }
-
   }
 }
 
-//let scorePanel = document.createElement(div)
 
 // Now instantiate your objects.
 const newPlayer = new Player();
@@ -94,7 +126,3 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
-
-// additional syles for the score box
-const container = document.createElement('div');
-container.setAttribute('class', 'scorePanel');
