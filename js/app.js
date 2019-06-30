@@ -5,26 +5,11 @@ panel.setAttribute('class', 'scorePanel');
 body.appendChild(panel);
 
 let score = 0;
-
 const scoreCount = document.createElement('p')
-scoreCount.innerHTML =' Score: ' + score;
-
+scoreCount.innerHTML = 'Score: ' + score;
 panel.appendChild(scoreCount);
 
 
-
-  // ;
-  // msg.textContent = 'Congratulations, your final time was ' + count +' seconds. \n You got ' + displayStars +' stars';
-  //
-  //
-  // const playAgain = document.createElement('button');
-  // playAgain.textContent = 'Play Again!';
-  // panel.appendChild(playAgain);
-  //
-  //
-  // playAgain.onclick = function() {
-  //   //resetGame();
-  // }
 
 
 // Enemies our player must avoid
@@ -49,6 +34,7 @@ class Enemy {
         64 + player.y > this.y) {
         player.x = 303;
         player.y = 404;
+        gameOver();
     };
   };
   render() {
@@ -63,7 +49,7 @@ class Enemy {
 // a handleInput() method.
 class Player {
   constructor(){
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/char-horn-girl.png';
     this.x = 303;
     this.y = 404;
   }
@@ -87,6 +73,7 @@ class Player {
         this.x = 303;
         this.y = 404;
         score += 10;
+        scoreCount.innerHTML = 'Score: ' + score;
         console.log(score);
 
       }
@@ -126,3 +113,28 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+function gameOver(){
+  const body = document.querySelector('body');
+  const panel = document.createElement('div');
+  panel.setAttribute('class','gameOver');
+
+  body.appendChild(panel);
+
+  const msg = document.createElement('p');
+  msg.textContent = 'Game Over!';
+  panel.appendChild(msg);
+
+  const playAgian = document.createElement('button');
+  playAgian.setAttribute('class', 'btn');
+  playAgian.textContent = 'Play Again';
+  panel.appendChild(playAgian);
+
+  playAgian.onclick = function() {
+    score = 0;
+    scoreCount.innerHTML = 'Score: ' + score;
+    panel.parentNode.removeChild(panel);
+  }
+
+
+};
