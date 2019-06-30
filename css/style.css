@@ -30,7 +30,8 @@ body {
   border-radius: 10px;
   background: linear-gradient(to top right, peachPuff, PaleTurquoise);
   color: cadetBlue;
-  padding: 2em;
+  padding: 1.5em;
+  white-space: pre;
 }
 
 .gameOver .btn {
