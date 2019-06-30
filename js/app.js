@@ -10,8 +10,6 @@ scoreCount.innerHTML = 'Score: ' + score;
 panel.appendChild(scoreCount);
 
 
-
-
 // Enemies our player must avoid
 class Enemy {
   constructor(x, y, speed){
@@ -40,9 +38,7 @@ class Enemy {
   render() {
       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
-
 };
-
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -69,12 +65,13 @@ class Player {
       case 'up':
       if (this.y >= 83) {
           this.y -= 83
+
       } else {
+
         this.x = 303;
         this.y = 404;
         score += 10;
         scoreCount.innerHTML = 'Score: ' + score;
-        console.log(score);
 
       }
       break;
@@ -103,7 +100,7 @@ let player = newPlayer;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+const keys = function(e) {
     const allowedKeys = {
         37: 'left',
         38: 'up',
@@ -116,7 +113,11 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
-});
+};
+
+document.addEventListener('keyup', keys);
+
+// game over pop up message
 
 function gameOver(){
   const body = document.querySelector('body');
@@ -126,7 +127,7 @@ function gameOver(){
   body.appendChild(panel);
 
   const msg = document.createElement('p');
-  msg.textContent = 'Game Over!';
+  msg.textContent = 'Game Over! \r\n You scored ' + score + ' points';
   panel.appendChild(msg);
 
   const playAgian = document.createElement('button');
@@ -138,7 +139,9 @@ function gameOver(){
     score = 0;
     scoreCount.innerHTML = 'Score: ' + score;
     panel.parentNode.removeChild(panel);
+    document.addEventListener('keyup', keys);
+
   }
 
-
+  document.removeEventListener('keyup', keys);
 };
