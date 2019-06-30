@@ -3,18 +3,30 @@
 ## Table of Contents
 
 - [Instructions](#instructions)
-- [Contributing](#contributing)
+- [How to play](#how-to-play)
 
 ## Instructions
+### Step 1 - Download All Required Files
+1. All files are required to play this game.
+2. To download these files you can download a zipped file using the gree clone / download button in the top right corner.
+3. You shold save all these file in the same folder. Feel free to create you own or use an existing folder.Remember where you saved your files as you will need this later.
 
-Use this [rubric](https://review.udacity.com/#!/rubrics/15/view) for self-checking your submission.
+### Step 2 - Opening The Game
+Find where you saved the files. You will need to open the index.html with a browser. You shold be able to double click this file to automatically open it in you browser. Some of you may get a prompt asking what programme you would like to use, in this case just select any browser ( FireFox, Google Chrome ect.).
 
-Make sure the functions you write are **object-oriented** - either class functions (like `Player` and `Enemy`) or class prototype functions such as `Enemy.prototype.checkCollisions`. Also make sure that the keyword `this` is used appropriately within your class and class prototype functions to refer to the object the function is called upon.
+Alternatively you can right click and select open with... this may have auto selected a browser or it will open a list of programmes you can choose from, just select any browser.
 
-Your **README.md** file should be updated with instructions on both how to 1. Run and 2. Play your arcade game.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## How to play
+### Movement
+You can use either the arrow keys or W,A,S,D to move the character around the board.
 
-## Contributing
+### Score
+Everytime you reach the water you will gain 10 points.
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+### Game Over
+If you get hit by a bug or move too early and hit a bug the game is over.
+
+
+
+
